@@ -44,7 +44,7 @@ const CarouselPreview: React.FC<CarouselPreviewProps> = ({ slides, palette, user
     }
 
     try {
-      const dataUrl = await htmlToImage.toPng(slideElement, { quality: 1, pixelRatio: 2 });
+      const dataUrl = await htmlToImage.toPng(slideElement, { quality: 1, pixelRatio: 1 });
       const link = document.createElement('a');
       link.download = `carousel-slide-${index + 1}.png`;
       link.href = dataUrl;
@@ -66,7 +66,7 @@ const CarouselPreview: React.FC<CarouselPreviewProps> = ({ slides, palette, user
       for (let i = 0; i < slideRefs.current.length; i++) {
         const slideElement = slideRefs.current[i]?.current;
         if (slideElement) {
-          const dataUrl = await htmlToImage.toPng(slideElement, { quality: 1, pixelRatio: 2 });
+          const dataUrl = await htmlToImage.toPng(slideElement, { quality: 1, pixelRatio: 1 });
           const base64Data = dataUrl.split(',')[1];
           zip.file(`carousel-slide-${i + 1}.png`, base64Data, { base64: true });
         }
@@ -137,17 +137,19 @@ const CarouselPreview: React.FC<CarouselPreviewProps> = ({ slides, palette, user
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {slides.map((slide, index) => (
             <div key={index} className="flex flex-col items-center">
-              <CarouselSlide
-                ref={slideRefs.current[index]}
-                slide={slide}
-                palette={palette}
-                username={username}
-                slideNumber={index + 1}
-                totalSlides={slides.length}
-              />
+              <div style={{ transform: 'scale(0.35)', transformOrigin: 'top center', marginBottom: '-700px' }}>
+                <CarouselSlide
+                  ref={slideRefs.current[index]}
+                  slide={slide}
+                  palette={palette}
+                  username={username}
+                  slideNumber={index + 1}
+                  totalSlides={slides.length}
+                />
+              </div>
               <button
                 onClick={() => handleDownload(index)}
-                className="mt-4 w-full max-w-lg flex justify-center items-center bg-gray-700 text-white font-semibold py-2.5 px-4 rounded-lg shadow hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors dark:bg-gray-600 dark:hover:bg-gray-500 dark:ring-offset-gray-900"
+                className="mt-4 w-full max-w-sm flex justify-center items-center bg-gray-700 text-white font-semibold py-2.5 px-4 rounded-lg shadow hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors dark:bg-gray-600 dark:hover:bg-gray-500 dark:ring-offset-gray-900"
                 aria-label={`Baixar o slide ${index + 1}`}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">

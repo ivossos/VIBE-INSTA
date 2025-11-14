@@ -18,16 +18,17 @@ const CarouselSlide = forwardRef<HTMLDivElement, CarouselSlideProps>(({ slide, p
     switch (slide.slide_type) {
       case 'cover':
         return (
-          <div className={`flex flex-col justify-center items-center text-center h-full ${hasImage ? 'px-6 py-8' : 'px-12 pt-16 pb-20'} overflow-hidden`}>
-            <h2 className={`${hasImage ? 'text-xl' : 'text-2xl lg:text-3xl'} font-extrabold tracking-tight leading-tight break-words w-full`}>
+          <div className="flex flex-col justify-center items-center text-center h-full overflow-hidden" style={{ padding: hasImage ? '48px 40px' : '120px 80px 140px' }}>
+            <h2 className="font-extrabold tracking-tight leading-tight break-words w-full" style={{ fontSize: hasImage ? '52px' : '72px', lineHeight: '1.2' }}>
               {slide.title}
             </h2>
             <p
-              className={`mt-3 ${hasImage ? 'text-xs' : 'text-sm lg:text-base'} ${palette.secondary} tracking-normal leading-relaxed break-words w-full`}
+              className={`${palette.secondary} tracking-normal leading-relaxed break-words w-full`}
+              style={{ fontSize: hasImage ? '28px' : '36px', marginTop: '24px', lineHeight: '1.6' }}
               dangerouslySetInnerHTML={{ __html: contentWithBreaks }}
             />
             {!hasImage && (
-                <div className={`absolute bottom-10 text-xs font-semibold ${palette.secondary}`}>
+                <div className={`absolute font-semibold ${palette.secondary}`} style={{ bottom: '80px', fontSize: '24px' }}>
                 <p>Deslize para o lado &rarr;</p>
               </div>
             )}
@@ -35,19 +36,19 @@ const CarouselSlide = forwardRef<HTMLDivElement, CarouselSlideProps>(({ slide, p
         );
       case 'cta':
         return (
-          <div className={`flex flex-col justify-center items-center text-center h-full ${hasImage ? 'px-6 py-6' : 'px-12 pt-16 pb-20'} overflow-hidden`}>
-            <h3 className={`${hasImage ? 'text-base' : 'text-lg lg:text-xl'} font-bold ${palette.secondary} tracking-tight leading-snug break-words w-full`}>{slide.title}</h3>
-            <p className={`mt-3 ${hasImage ? 'text-sm' : 'text-base lg:text-lg'} font-semibold tracking-normal leading-relaxed break-words w-full`} dangerouslySetInnerHTML={{ __html: contentWithBreaks }} />
-            <div className={`mt-4 px-5 py-2.5 rounded-lg ${palette.primary}`}>
-              <span className={`${hasImage ? 'text-xs' : 'text-sm'} ${palette.text.startsWith('text-') ? palette.text : 'text-white'} tracking-wide`}>Siga para mais!</span>
+          <div className="flex flex-col justify-center items-center text-center h-full overflow-hidden" style={{ padding: hasImage ? '48px 40px' : '120px 80px 140px' }}>
+            <h3 className={`font-bold ${palette.secondary} tracking-tight leading-snug break-words w-full`} style={{ fontSize: hasImage ? '40px' : '56px', lineHeight: '1.3' }}>{slide.title}</h3>
+            <p className="font-semibold tracking-normal leading-relaxed break-words w-full" style={{ fontSize: hasImage ? '32px' : '42px', marginTop: '24px', lineHeight: '1.5' }} dangerouslySetInnerHTML={{ __html: contentWithBreaks }} />
+            <div className={`rounded-lg ${palette.primary}`} style={{ marginTop: '32px', padding: '20px 40px' }}>
+              <span className={`${palette.text.startsWith('text-') ? palette.text : 'text-white'} tracking-wide`} style={{ fontSize: hasImage ? '28px' : '32px' }}>Siga para mais!</span>
             </div>
           </div>
         );
       default: // 'content'
         return (
-          <div className={`flex flex-col h-full ${hasImage ? 'justify-start px-6 py-6' : 'justify-center px-12 pt-16 pb-20'} overflow-hidden`}>
-            <h3 className={`${hasImage ? 'text-base' : 'text-base lg:text-lg'} font-bold ${palette.secondary} tracking-tight leading-snug break-words w-full`}>{slide.title}</h3>
-            <p className={`mt-3 ${hasImage ? 'text-xs' : 'text-sm lg:text-base'} leading-relaxed tracking-normal break-words w-full`} dangerouslySetInnerHTML={{ __html: contentWithBreaks }} />
+          <div className={`flex flex-col h-full overflow-hidden`} style={{ padding: hasImage ? '48px 40px' : '120px 80px 140px', justifyContent: hasImage ? 'flex-start' : 'center' }}>
+            <h3 className={`font-bold ${palette.secondary} tracking-tight leading-snug break-words w-full`} style={{ fontSize: hasImage ? '40px' : '50px', lineHeight: '1.3' }}>{slide.title}</h3>
+            <p className="leading-relaxed tracking-normal break-words w-full" style={{ fontSize: hasImage ? '28px' : '34px', marginTop: '24px', lineHeight: '1.6' }} dangerouslySetInnerHTML={{ __html: contentWithBreaks }} />
           </div>
         );
     }
@@ -57,15 +58,24 @@ const CarouselSlide = forwardRef<HTMLDivElement, CarouselSlideProps>(({ slide, p
     return (
       <div
         ref={ref}
-        className={`aspect-square w-full max-w-lg mx-auto shadow-2xl rounded-2xl overflow-hidden flex flex-col ${palette.background} ${palette.text}`}
-        style={{ wordWrap: 'break-word', overflowWrap: 'break-word', hyphens: 'auto' }}
+        className={`flex flex-col ${palette.background} ${palette.text}`}
+        style={{
+          width: '1080px',
+          height: '1080px',
+          wordWrap: 'break-word',
+          overflowWrap: 'break-word',
+          hyphens: 'auto',
+          borderRadius: '40px',
+          overflow: 'hidden',
+          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
+        }}
       >
         <div className="w-full h-1/2 relative">
           <img src={slide.imageUrl} alt={slide.title} className="w-full h-full object-cover" />
-          <div className="absolute top-4 left-4 text-sm font-bold text-white bg-black bg-opacity-40 px-2 py-1 rounded">
+          <div className="absolute text-white bg-black bg-opacity-40 rounded" style={{ top: '32px', left: '32px', fontSize: '28px', fontWeight: 'bold', padding: '12px 16px' }}>
             {username}
           </div>
-          <div className="absolute bottom-4 right-4 text-xs font-mono px-2 py-1 rounded bg-black bg-opacity-40 text-white">
+          <div className="absolute font-mono bg-black bg-opacity-40 text-white rounded" style={{ bottom: '32px', right: '32px', fontSize: '22px', padding: '12px 16px' }}>
             {slideNumber}/{totalSlides}
           </div>
         </div>
@@ -80,16 +90,25 @@ const CarouselSlide = forwardRef<HTMLDivElement, CarouselSlideProps>(({ slide, p
   return (
     <div
       ref={ref}
-      className={`aspect-square w-full max-w-lg mx-auto shadow-2xl rounded-2xl overflow-hidden relative flex flex-col ${palette.background} ${palette.text}`}
-      style={{ wordWrap: 'break-word', overflowWrap: 'break-word', hyphens: 'auto' }}
+      className={`relative flex flex-col ${palette.background} ${palette.text}`}
+      style={{
+        width: '1080px',
+        height: '1080px',
+        wordWrap: 'break-word',
+        overflowWrap: 'break-word',
+        hyphens: 'auto',
+        borderRadius: '40px',
+        overflow: 'hidden',
+        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
+      }}
     >
       <div className="relative z-20 flex-grow flex flex-col overflow-hidden">
         {renderSlideContent()}
       </div>
-      <div className={`absolute bottom-4 right-4 text-xs font-mono px-2 py-1 rounded opacity-80 ${palette.primary} ${palette.text.startsWith('text-') ? palette.text : 'text-white'}`}>
+      <div className={`absolute font-mono rounded opacity-80 ${palette.primary} ${palette.text.startsWith('text-') ? palette.text : 'text-white'}`} style={{ bottom: '32px', right: '32px', fontSize: '22px', padding: '12px 16px' }}>
         {slideNumber}/{totalSlides}
       </div>
-      <div className={`absolute top-4 left-4 text-sm font-bold opacity-70`}>
+      <div className="absolute font-bold opacity-70" style={{ top: '32px', left: '32px', fontSize: '28px' }}>
         {username}
       </div>
     </div>
