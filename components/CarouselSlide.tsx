@@ -19,12 +19,12 @@ const CarouselSlide = forwardRef<HTMLDivElement, CarouselSlideProps>(({ slide, p
       case 'cover':
         return (
           <div className={`flex flex-col justify-center items-center text-center h-full ${hasImage ? 'p-6' : 'p-12'}`}>
-            <h2 className={`${hasImage ? 'text-3xl' : 'text-4xl lg:text-5xl'} font-extrabold`}>
+            <h2 className={`${hasImage ? 'text-3xl' : 'text-4xl lg:text-5xl'} font-extrabold tracking-tight leading-tight`}>
               {slide.title}
             </h2>
-            <p 
-              className={`mt-3 ${hasImage ? 'text-base' : 'text-lg lg:text-xl'} ${palette.secondary}`} 
-              dangerouslySetInnerHTML={{ __html: contentWithBreaks }} 
+            <p
+              className={`mt-3 ${hasImage ? 'text-base' : 'text-lg lg:text-xl'} ${palette.secondary} tracking-normal leading-relaxed`}
+              dangerouslySetInnerHTML={{ __html: contentWithBreaks }}
             />
             {!hasImage && (
                 <div className={`absolute bottom-8 text-sm font-semibold ${palette.secondary}`}>
@@ -36,18 +36,18 @@ const CarouselSlide = forwardRef<HTMLDivElement, CarouselSlideProps>(({ slide, p
       case 'cta':
         return (
           <div className={`flex flex-col justify-center items-center text-center h-full ${hasImage ? 'p-6' : 'p-12'}`}>
-            <h3 className={`${hasImage ? 'text-xl' : 'text-2xl lg:text-3xl'} font-bold ${palette.secondary}`}>{slide.title}</h3>
-            <p className={`mt-3 ${hasImage ? 'text-lg' : 'text-xl lg:text-2xl'} font-semibold`} dangerouslySetInnerHTML={{ __html: contentWithBreaks }} />
+            <h3 className={`${hasImage ? 'text-xl' : 'text-2xl lg:text-3xl'} font-bold ${palette.secondary} tracking-tight leading-snug`}>{slide.title}</h3>
+            <p className={`mt-3 ${hasImage ? 'text-lg' : 'text-xl lg:text-2xl'} font-semibold tracking-normal leading-relaxed`} dangerouslySetInnerHTML={{ __html: contentWithBreaks }} />
             <div className={`mt-4 px-5 py-2.5 rounded-lg ${palette.primary}`}>
-              <span className={`${hasImage ? 'text-sm' : ''} ${palette.text.startsWith('text-') ? palette.text : 'text-white'}`}>Siga para mais!</span>
+              <span className={`${hasImage ? 'text-sm' : ''} ${palette.text.startsWith('text-') ? palette.text : 'text-white'} tracking-wide`}>Siga para mais!</span>
             </div>
           </div>
         );
       default: // 'content'
         return (
           <div className={`flex flex-col h-full ${hasImage ? 'justify-start p-8' : 'justify-center p-10'}`}>
-            <h3 className={`${hasImage ? 'text-xl' : 'text-xl lg:text-2xl'} font-bold ${palette.secondary}`}>{slide.title}</h3>
-            <p className={`mt-3 ${hasImage ? 'text-base' : 'text-lg lg:text-xl'} leading-relaxed`} dangerouslySetInnerHTML={{ __html: contentWithBreaks }} />
+            <h3 className={`${hasImage ? 'text-xl' : 'text-xl lg:text-2xl'} font-bold ${palette.secondary} tracking-tight leading-snug`}>{slide.title}</h3>
+            <p className={`mt-3 ${hasImage ? 'text-base' : 'text-lg lg:text-xl'} leading-relaxed tracking-normal`} dangerouslySetInnerHTML={{ __html: contentWithBreaks }} />
           </div>
         );
     }
